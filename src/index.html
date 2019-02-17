@@ -17,6 +17,19 @@
 			 font-size: x-large;
 		}
 		
+		.button {
+		  width: 50%;
+		  background-color: Gray;
+		  margin: 6px 2px;
+		  border: none;
+		  color: white;
+		  padding: 10px 20px;
+		  text-align: center;
+		  text-decoration: none;
+		  display: inline-block;
+		  font-size: 16px;
+		}
+		
 		#info {
 			position	: absolute;
 			top		: 0px;
@@ -45,8 +58,12 @@
 	<body>
 		<div id="container"></div>
 		<div id="info">
-			<div><span class=header>Robot drawer control</span></div>
+			<div><span id="header1" class=header>Robot drawer control</span></div>
 			<div><span id="result"></span></div>
+			<div>
+				<button id="btn1" class="button" onclick="btn1Click()">Pen up</button>
+				<button id="btn2" class="button" onclick="btn2Click()">Pen down</button>
+			</div>
 		</div> 
 		<script src="virtualjoystick.js"></script>
 		<script>
@@ -68,11 +85,21 @@
 				outputEl.innerHTML	= '<b>Direction:</b> '
 					+ ' dx:'+joystick.deltaX()
 					+ ' dy:'+joystick.deltaY()
-					+ (joystick.right()	? ' right'	: '')
-					+ (joystick.up()	? ' up'		: '')
-					+ (joystick.left()	? ' left'	: '')
-					+ (joystick.down()	? ' down' 	: '')	
+					+ (joystick.right()	? ' right'	 : '')
+					+ (joystick.up()	? ' forward' : '')
+					+ (joystick.left()	? ' left'	 : '')
+					+ (joystick.down()	? ' backward': '')	
 			}, 1/30 * 1000);
+			
+			function btn1Click() {
+			  document.getElementById('btn1').style.display = "none";
+			  document.getElementById('btn2').style.display = "inline-block";
+			}
+			
+			function btn2Click() {
+			  document.getElementById('btn1').style.display = "inline-block";
+			  document.getElementById('btn2').style.display = "none";
+			}
 		</script>
 	</body>
 </html>
